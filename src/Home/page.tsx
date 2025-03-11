@@ -1,7 +1,8 @@
 import Header from "./header";
 import PrayingCards from "./PrayingCards/page";
-import { getAllTimings } from "../Functions/APICalls/apiCalls";
-import { useQuery } from "@tanstack/react-query";
+// import { getAllTimings } from "../Functions/APICalls/apiCalls";
+// import { useQuery } from "@tanstack/react-query";
+import { useGetAllTimings } from "../Functions/Hooks/QueryHooks";
 import { createContext } from "react";
 import { TimingContextType, timeZoneDetails } from "../Type";
 import { useState } from "react";
@@ -16,7 +17,7 @@ export const TimingContext = createContext<TimingContextType | null>(null);
 
 function Home() {
     const [selectedCountry, setSelectedCountry] = useState({country: 'EG', city: 'cairo', title: 'جمهورية مصر العربية', dateTime: cairoTime});
-    const { data: timingData, isLoading, isError, refetch } = useQuery({ queryKey: ['timing'], queryFn: () => getAllTimings(selectedCountry) });
+    const { data: timingData, isLoading, isError, refetch } = useGetAllTimings(selectedCountry);
     const allTimings = timingData?.data?.timings;
 
     function changeCountryOnSelect(details: timeZoneDetails) {
