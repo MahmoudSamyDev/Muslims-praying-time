@@ -11,7 +11,7 @@ function Header(props: HeaderProps) {
     const { details, allTimings } = props;
 
     useEffect(() => {
-        if (!allTimings) return; // Ensure data is available
+        if (!allTimings) return;
     
         const updateTime = () => {
             const currentTime = moment().locale('en');

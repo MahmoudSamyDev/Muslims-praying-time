@@ -18,12 +18,11 @@ const initialCountry = {country: 'EG', city: 'cairo', title: 'جمهورية م�
 
 function Home() {
     const [selectedCountry, setSelectedCountry] = useState(initialCountry);
-    const { data, isLoading, isError, refetch } = useGetAllTimings(selectedCountry);
+    const { data, isLoading, isError } = useGetAllTimings(selectedCountry);
     const allTimings = data?.data?.timings;
 
     function changeCountryOnSelect(details: timeZoneDetails) {
         setSelectedCountry(details);
-        refetch();
     }
     return (
         <div className="w-[80%] h-[90%] flex flex-col items-center gap-[35px]">
