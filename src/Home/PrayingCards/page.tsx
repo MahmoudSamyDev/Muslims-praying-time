@@ -16,7 +16,7 @@ function PrayingCards() {
     ];
 
     return (
-        <div className='w-full p-[30px] flex-1 flex flex-col gap-[40px] text-white' style={{ backgroundColor: theme.palette.primary.main }}>
+        <div className='w-full p-[30px] flex-1 flex flex-col gap-[40px] text-white relative z-[100]' style={{ backgroundColor: theme.palette.primary.main }}>
             <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-[40px]'>
             {
                 PrayingCardsObj?.map((card) => (

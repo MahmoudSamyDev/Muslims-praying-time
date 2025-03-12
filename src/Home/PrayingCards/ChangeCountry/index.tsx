@@ -58,7 +58,6 @@ export default function BasicSelect() {
         const displayedTime = event.currentTarget.dataset.timeDisplayed || '';
 
         const dateTime = { actualTime, displayedTime };
-        // console.log(`Country: ${country}, City: ${city}, Title: ${title}, Date: ${actualTime}, Displayed: ${displayedTime}`);
 
         changeCountryOnSelect({ country, city, title, dateTime });
     }

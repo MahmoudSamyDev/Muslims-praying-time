@@ -9,6 +9,13 @@ const client = axios.create({
     },
 });
 
+/**
+ * Makes an HTTP request using the provided options.
+ *
+ * @param {object} options - The options to configure the HTTP request.
+ * @returns {Promise<any>} - A promise that resolves to the response of the HTTP request.
+ * @throws {Error} - Throws an error if the HTTP request fails.
+ */
 export const req = async ({ ...options }) => {
     try {
         const response = await client({ ...options });

@@ -3,7 +3,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { useState } from 'react';
-import Home from './Home/page'
+import Home from './Home/page';
+import { JSX } from 'react';
 
 // Dark theme
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -37,7 +38,27 @@ const lightTheme = createTheme({
 });
 
 
-function App() {
+/**
+ * The main application component that sets up the theme and query client providers.
+ * 
+ * @component
+ * 
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @example
+ * // Usage example
+ * <App />
+ * 
+ * @remarks
+ * This component initializes the `QueryClient` for React Query and sets up the theme using Material-UI's `ThemeProvider`.
+ * It also includes a theme toggle function to switch between dark and light themes.
+ * 
+ * @function toggleTheme
+ * Toggles the current theme between dark and light modes.
+ * 
+ * @returns {void}
+ */
+function App(): JSX.Element {
   const queryClient = new QueryClient();
   const [theme, setTheme] = useState(darkTheme);
 

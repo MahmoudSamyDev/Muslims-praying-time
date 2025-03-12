@@ -3,6 +3,26 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 
+/**
+ * A custom styled Material-UI Switch component.
+ * 
+ * @component
+ * @example
+ * // Usage example:
+ * <MaterialUISwitch checked={checked} onChange={handleChange} />
+ * 
+ * @param {object} theme - The theme object provided by Material-UI.
+ * 
+ * @returns {JSX.Element} A styled switch component with custom styles for different states.
+ * 
+ * @styles
+ * - The switch has a width of 62px and height of 34px with padding of 7px.
+ * - The switch base has a margin of 1px, no padding, and an initial transform of 'translateX(6px)'.
+ * - When checked, the switch base has a white color, transforms to 'translateX(22px)', and displays a custom SVG icon.
+ * - The switch thumb has a background color of '#001e3c', width and height of 32px, and displays a custom SVG icon.
+ * - The switch track has an opacity of 1, a background color of '#aab4be', and a border radius of 10px.
+ * - Additional styles are applied based on the 'dark' theme.
+ */
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
     height: 34,
@@ -61,7 +81,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export default function MUIThemeSwitch({changeTheme}: {changeTheme: () => void}) {
     return (
-        <div className='absolute top-[10px] right-[10px] mt-[20px] ml-[-10px]'>
+        <div className='fixed top-[10px] right-[10px]  z-[10000]'>
             <FormGroup>
                 <FormControlLabel
                     control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked onClick={changeTheme}/>}

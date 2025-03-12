@@ -3,8 +3,28 @@ import { HeaderProps } from '../Type';
 import moment from 'moment';
 import { useState, useEffect } from 'react';
 import { PrayingDispay } from '../utilities/StaticData';
+import { JSX } from 'react';
 
-function Header(props: HeaderProps) {
+/**
+ * Header component displays the next prayer time and the remaining duration until the next prayer.
+ * It also shows the current date and a title from the provided details.
+ *
+ * @component
+ * @param {HeaderProps} props - The properties object.
+ * @param {Object} props.details - The details object containing dateTime and title.
+ * @param {Object} props.details.dateTime - The dateTime object containing displayedTime.
+ * @param {string} props.details.dateTime.displayedTime - The displayed time string.
+ * @param {string} props.details.title - The title string.
+ * @param {Object} props.allTimings - The object containing prayer times.
+ * @param {string} props.allTimings.Fajr - The Fajr prayer time.
+ * @param {string} props.allTimings.Dhuhr - The Dhuhr prayer time.
+ * @param {string} props.allTimings.Asr - The Asr prayer time.
+ * @param {string} props.allTimings.Maghrib - The Maghrib prayer time.
+ * @param {string} props.allTimings.Isha - The Isha prayer time.
+ *
+ * @returns {JSX.Element} The rendered Header component.
+ */
+function Header(props: HeaderProps): JSX.Element {
     const theme = useTheme();
     const [nextPray, setNextPray] = useState('');
     const [duration, setDuration] = useState('');

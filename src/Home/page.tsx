@@ -16,6 +16,31 @@ const cairoTime = moment().tz('Africa/Cairo').format('DD-MM-YYYY');
 const cairoTimeDisplayed =moment().tz('Africa/Cairo').format('a h:mm | DD MMMM');
 const initialCountry = {country: 'EG', city: 'cairo', title: 'جمهورية مصر العربية', dateTime: {actualTime: cairoTime, displayedTime: cairoTimeDisplayed}}
 
+/**
+ * Home component that displays prayer timings based on the selected country.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ * 
+ * @example
+ * // Usage example
+ * <Home />
+ * 
+ * @remarks
+ * This component uses the `useGetAllTimings` hook to fetch prayer timings for the selected country.
+ * It provides a context `TimingContext` to share the timings and a function to change the selected country.
+ * 
+ * @hook
+ * - `useState` - Manages the state of the selected country.
+ * - `useGetAllTimings` - Fetches prayer timings for the selected country.
+ * 
+ * @context
+ * - `TimingContext.Provider` - Provides `allTimings` and `changeCountryOnSelect` to child components.
+ * 
+ * @param {Object} props - The props that are passed to the component.
+ * 
+ * @returns {JSX.Element} The rendered component.
+ */
 function Home() {
     const [selectedCountry, setSelectedCountry] = useState(initialCountry);
     const { data, isLoading, isError } = useGetAllTimings(selectedCountry);
