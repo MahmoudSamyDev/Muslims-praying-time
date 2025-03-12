@@ -117,7 +117,8 @@ Contributions are welcome! If you’d like to improve this project:
 3. **Commit your changes**.  
 4. **Submit a Pull Request**.  
 
----
+## [🤝 Live Mode](https://muslim-praying-times-reactapp.netlify.app/)
+
 
 ## **📜 License**  
 This project is **open-source** and available under the **MIT License**.
