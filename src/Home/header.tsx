@@ -11,38 +11,43 @@ function Header(props: HeaderProps) {
     const { details, allTimings } = props;
 
     useEffect(() => {
+        if (!allTimings) return; // Ensure data is available
+    
         const updateTime = () => {
             const currentTime = moment().locale('en');
-            const afterFajrBeforeDuhr = currentTime.isAfter(moment(allTimings?.Fajr, 'hh:mm')) && currentTime.isBefore(moment(allTimings?.Dhuhr, 'hh:mm'));
-            const afterDuhrBeforeAsr = currentTime.isAfter(moment(allTimings?.Dhuhr, 'hh:mm')) && currentTime.isBefore(moment(allTimings?.Asr, 'hh:mm'));
-            const afterAsrBeforeMaghrib = currentTime.isAfter(moment(allTimings?.Asr, 'hh:mm')) && currentTime.isBefore(moment(allTimings?.Maghrib, 'hh:mm'));
-            const afterMaghribBeforeIsha = currentTime.isAfter(moment(allTimings?.Maghrib, 'HH:mm')) && currentTime.isBefore(moment(allTimings?.Isha, 'hh:mm'));
-            const afterIshaBeforeFajr = currentTime.isAfter(moment(allTimings?.Isha, 'hh:mm')) || currentTime.isBefore(moment(allTimings?.Fajr, 'hh:mm'));
-
-            const allIntervals = [afterFajrBeforeDuhr, afterDuhrBeforeAsr, afterAsrBeforeMaghrib, afterMaghribBeforeIsha, afterIshaBeforeFajr];
-            for (let index = 0; index < allIntervals.length; index++) {
-                if (allIntervals[index]) {
-                    setNextPray(PrayingDispay[index + 1]?.title || '');
-
-                    const nextTime = allTimings[PrayingDispay[index + 1]?.key as keyof typeof allTimings];
-                    const difference = moment(nextTime, 'hh:mm').diff(currentTime);
+    
+            const prayerIntervals = [
+                { check: currentTime.isAfter(moment(allTimings?.Fajr, 'HH:mm')) && currentTime.isBefore(moment(allTimings?.Dhuhr, 'HH:mm')), nextIndex: 1 },
+                { check: currentTime.isAfter(moment(allTimings?.Dhuhr, 'HH:mm')) && currentTime.isBefore(moment(allTimings?.Asr, 'HH:mm')), nextIndex: 2 },
+                { check: currentTime.isAfter(moment(allTimings?.Asr, 'HH:mm')) && currentTime.isBefore(moment(allTimings?.Maghrib, 'HH:mm')), nextIndex: 3 },
+                { check: currentTime.isAfter(moment(allTimings?.Maghrib, 'HH:mm')) && currentTime.isBefore(moment(allTimings?.Isha, 'HH:mm')), nextIndex: 4 },
+                { check: currentTime.isAfter(moment(allTimings?.Isha, 'HH:mm')) || currentTime.isBefore(moment(allTimings?.Fajr, 'HH:mm')), nextIndex: 0 },
+            ];
+    
+            for (const interval of prayerIntervals) {
+                if (interval.check) {
+                    const nextPrayerIndex = interval.nextIndex; 
+                    const nextPrayer = PrayingDispay[nextPrayerIndex];
+    
+                    setNextPray(nextPrayer?.title || '');
+    
+                    const nextTime = allTimings[nextPrayer?.key as keyof typeof allTimings];
+                    if (!nextTime) return; 
+    
+                    const difference = moment(nextTime, 'HH:mm').diff(currentTime);
                     const differenceDuration = moment.duration(difference);
-
+    
                     setDuration(`${differenceDuration.hours()} : ${differenceDuration.minutes()} : ${differenceDuration.seconds()}`);
                     break;
                 }
             }
         };
-
-        // Run immediately
+    
         updateTime();
-
-        // Update every second
-        // const intervalId = setInterval(updateTime, 1000);
-
-        // Cleanup function
-        // return () => clearInterval(intervalId);
+        const intervalId = setInterval(updateTime, 1000);
+        return () => clearInterval(intervalId);
     }, [allTimings]);
+    
 
     return (
         <header className='w-full flex flex-col lg:flex-row gap-[50px] lg:gap-0 justify-between items-center p-8 text-white' style={{ backgroundColor: theme.palette.primary.main }}>
