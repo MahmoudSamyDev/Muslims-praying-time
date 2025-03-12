@@ -1,7 +1,5 @@
 import Header from "./header";
 import PrayingCards from "./PrayingCards/page";
-// import { getAllTimings } from "../Functions/APICalls/apiCalls";
-// import { useQuery } from "@tanstack/react-query";
 import { useGetAllTimings } from "../Functions/Hooks/QueryHooks";
 import { createContext } from "react";
 import { TimingContextType, timeZoneDetails } from "../Type";
@@ -11,14 +9,17 @@ import 'moment/dist/locale/ar';
 import 'moment-timezone';
 
 moment.locale('ar');
-const cairoTime = moment().tz('Africa/Cairo').format('a h:mm | DD MMMM');
 
 export const TimingContext = createContext<TimingContextType | null>(null);
 
+const cairoTime = moment().tz('Africa/Cairo').format('DD-MM-YYYY');
+const cairoTimeDisplayed =moment().tz('Africa/Cairo').format('a h:mm | DD MMMM');
+const initialCountry = {country: 'EG', city: 'cairo', title: 'جمهورية مصر العربية', dateTime: {actualTime: cairoTime, displayedTime: cairoTimeDisplayed}}
+
 function Home() {
-    const [selectedCountry, setSelectedCountry] = useState({country: 'EG', city: 'cairo', title: 'جمهورية مصر العربية', dateTime: cairoTime});
-    const { data: timingData, isLoading, isError, refetch } = useGetAllTimings(selectedCountry);
-    const allTimings = timingData?.data?.timings;
+    const [selectedCountry, setSelectedCountry] = useState(initialCountry);
+    const { data, isLoading, isError, refetch } = useGetAllTimings(selectedCountry);
+    const allTimings = data?.data?.timings;
 
     function changeCountryOnSelect(details: timeZoneDetails) {
         setSelectedCountry(details);

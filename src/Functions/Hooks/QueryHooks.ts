@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllTimings } from "../../Functions/APICalls/apiCalls";
+import { timeZoneDetails } from "../../Type";
 
-type SelctedCountry_TP = {country: string, city: string, title: string, dateTime: string}
-
-export function useGetAllTimings(selectedCountry: SelctedCountry_TP) {
+export function useGetAllTimings(selectedCountry: timeZoneDetails) {
     const response = useQuery({ queryKey: ['timing'], queryFn: () => getAllTimings(selectedCountry) });
     return response; 
 }

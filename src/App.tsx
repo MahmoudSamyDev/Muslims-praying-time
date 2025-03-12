@@ -48,8 +48,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme} noSsr>
         <CssBaseline />
-        <main className='App relative flex justify-center items-center h-[100vh] bg-cover bg-center bg-no-repeat' dir='rtl' style={{ backgroundImage: `url('/background.jpg')` }}>
-          <MUIThemeSwitch changeTheme={toggleTheme}/>
+        <main
+          className="App flex justify-center items-center w-full min-h-screen bg-cover bg-fixed bg-center"
+          dir="rtl"
+          style={{ backgroundImage: `url('/background.jpg')` }}
+        >
+          <MUIThemeSwitch changeTheme={toggleTheme} />
           <Home />
         </main>
       </ThemeProvider>

@@ -1,8 +1,13 @@
+export type dateFormat = {
+    actualTime: string;
+    displayedTime: string;
+}
+
 export type timeZoneDetails = {
     country: string,
     city: string,
     title: string,
-    dateTime: string
+    dateTime: dateFormat,
 }
 
 export type allTimings_TP = {
@@ -20,7 +25,7 @@ export type TimingContextType  = {
 
 export interface HeaderProps {
     details: {
-        dateTime: string;
+        dateTime: dateFormat;
         title: string;
     };
     allTimings: allTimings_TP

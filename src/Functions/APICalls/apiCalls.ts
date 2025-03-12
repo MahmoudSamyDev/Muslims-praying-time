@@ -1,13 +1,14 @@
 import { req } from '../../assets/axios-utils';
+import { timeZoneDetails } from '../../Type';
 
-export async function getAllTimings(selectedCountry: {country: string, city: string}) {
+export async function getAllTimings(selectedCountry: timeZoneDetails) {
     try {
         const response = await req({
             method: 'GET',
-            url: `/10-03-2025`,
+            url: `/${selectedCountry?.dateTime?.actualTime}`,
             params: {
-                country: selectedCountry.country,
-                city: selectedCountry.city,
+                country: selectedCountry?.country,
+                city: selectedCountry?.city,
             }
         });
         return response.data;
