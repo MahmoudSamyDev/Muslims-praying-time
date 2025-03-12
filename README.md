@@ -110,9 +110,6 @@ Then open **http://localhost:5173/** in your browser.
 ### **Light mode**
 ![Dark Mode](public/Screenshots/lightMode.png)
 
-## **📸 Video**
-[![Watch the video](public/Screenshots/darkMode.png)](public/Recording.mp4)
-
 ## **🤝 Contributing**  
 Contributions are welcome! If you’d like to improve this project:  
 1. **Fork** the repository.  
