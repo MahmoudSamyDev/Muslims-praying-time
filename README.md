@@ -108,7 +108,7 @@ Then open **http://localhost:5173/** in your browser.
 ![Dark Mode](public/Screenshots/darkMode.png)
 
 ### **Light mode**
-![Dark Mode](public/Screenshots/lightMode.png)
+![Light Mode](public/Screenshots/lightMode.png)
 
 ## **🤝 Contributing**  
 Contributions are welcome! If you’d like to improve this project:  
